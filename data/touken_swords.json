@@ -1,0 +1,1037 @@
+[
+  {
+    "id": 0,
+    "name": "童子切安綱 剝落",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 3,
+    "name": "三日月宗近",
+    "type": "太刀",
+    "school": "三條",
+    "kiwameId": 4,
+    "extraIds": []
+  },
+  {
+    "id": 5,
+    "name": "小狐丸",
+    "type": "太刀",
+    "school": "三條",
+    "kiwameId": 6,
+    "extraIds": []
+  },
+  {
+    "id": 7,
+    "name": "石切丸",
+    "type": "大太刀",
+    "school": "三條",
+    "kiwameId": 8,
+    "extraIds": []
+  },
+  {
+    "id": 9,
+    "name": "岩融",
+    "type": "薙刀",
+    "school": "三條",
+    "kiwameId": 10,
+    "extraIds": []
+  },
+  {
+    "id": 11,
+    "name": "今劍",
+    "type": "短刀",
+    "school": "三條",
+    "kiwameId": 12,
+    "extraIds": []
+  },
+  {
+    "id": 13,
+    "name": "大典太光世",
+    "type": "太刀",
+    "school": "三池",
+    "kiwameId": 14,
+    "extraIds": []
+  },
+  {
+    "id": 15,
+    "name": "騷速劍",
+    "type": "太刀",
+    "school": "三池",
+    "kiwameId": 16,
+    "extraIds": []
+  },
+  {
+    "id": 17,
+    "name": "數珠丸恆次",
+    "type": "太刀",
+    "school": "青江",
+    "kiwameId": 18,
+    "extraIds": []
+  },
+  {
+    "id": 19,
+    "name": "笑面青江",
+    "type": "脇差",
+    "school": "青江",
+    "kiwameId": 20,
+    "extraIds": []
+  },
+  {
+    "id": 21,
+    "name": "鬼丸國綱",
+    "type": "太刀",
+    "school": "粟田口",
+    "kiwameId": 22,
+    "extraIds": []
+  },
+  {
+    "id": 23,
+    "name": "鳴狐",
+    "type": "打刀",
+    "school": "粟田口",
+    "kiwameId": 24,
+    "extraIds": []
+  },
+  {
+    "id": 25,
+    "name": "一期一振",
+    "type": "太刀",
+    "school": "粟田口",
+    "kiwameId": 26,
+    "extraIds": []
+  },
+  {
+    "id": 27,
+    "name": "鯰尾藤四郎",
+    "type": "脇差",
+    "school": "粟田口",
+    "kiwameId": 28,
+    "extraIds": []
+  },
+  {
+    "id": 29,
+    "name": "骨喰藤四郎",
+    "type": "脇差",
+    "school": "粟田口",
+    "kiwameId": 30,
+    "extraIds": []
+  },
+  {
+    "id": 31,
+    "name": "平野藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 32,
+    "extraIds": []
+  },
+  {
+    "id": 33,
+    "name": "厚藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 34,
+    "extraIds": []
+  },
+  {
+    "id": 35,
+    "name": "後藤藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 36,
+    "extraIds": []
+  },
+  {
+    "id": 37,
+    "name": "信濃藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 38,
+    "extraIds": []
+  },
+  {
+    "id": 39,
+    "name": "前田藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 40,
+    "extraIds": []
+  },
+  {
+    "id": 41,
+    "name": "秋田藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 42,
+    "extraIds": []
+  },
+  {
+    "id": 43,
+    "name": "博多藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 44,
+    "extraIds": []
+  },
+  {
+    "id": 45,
+    "name": "亂藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 46,
+    "extraIds": []
+  },
+  {
+    "id": 47,
+    "name": "五虎退",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 48,
+    "extraIds": []
+  },
+  {
+    "id": 49,
+    "name": "藥研藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 50,
+    "extraIds": []
+  },
+  {
+    "id": 51,
+    "name": "包丁藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 52,
+    "extraIds": []
+  },
+  {
+    "id": 53,
+    "name": "大包平",
+    "type": "太刀",
+    "school": "古備前",
+    "kiwameId": 54,
+    "extraIds": []
+  },
+  {
+    "id": 55,
+    "name": "鶯丸",
+    "type": "太刀",
+    "school": "古備前",
+    "kiwameId": 56,
+    "extraIds": []
+  },
+  {
+    "id": 57,
+    "name": "明石國行",
+    "type": "太刀",
+    "school": "來",
+    "kiwameId": 58,
+    "extraIds": []
+  },
+  {
+    "id": 59,
+    "name": "螢丸",
+    "type": "大太刀",
+    "school": "來",
+    "kiwameId": 60,
+    "extraIds": []
+  },
+  {
+    "id": 61,
+    "name": "愛染國俊",
+    "type": "短刀",
+    "school": "來",
+    "kiwameId": 62,
+    "extraIds": []
+  },
+  {
+    "id": 63,
+    "name": "千子村正",
+    "type": "打刀",
+    "school": "村正",
+    "kiwameId": 64,
+    "extraIds": []
+  },
+  {
+    "id": 65,
+    "name": "蜻蛉切",
+    "type": "槍",
+    "school": "村正",
+    "kiwameId": 66,
+    "extraIds": []
+  },
+  {
+    "id": 67,
+    "name": "物吉貞宗",
+    "type": "脇差",
+    "school": "貞宗",
+    "kiwameId": 68,
+    "extraIds": []
+  },
+  {
+    "id": 69,
+    "name": "太鼓鐘貞宗",
+    "type": "短刀",
+    "school": "貞宗",
+    "kiwameId": 70,
+    "extraIds": []
+  },
+  {
+    "id": 71,
+    "name": "龜甲貞宗",
+    "type": "打刀",
+    "school": "貞宗",
+    "kiwameId": 72,
+    "extraIds": []
+  },
+  {
+    "id": 73,
+    "name": "燭台切光忠",
+    "type": "太刀",
+    "school": "長船",
+    "kiwameId": 74,
+    "extraIds": []
+  },
+  {
+    "id": 75,
+    "name": "大般若長光",
+    "type": "太刀",
+    "school": "長船",
+    "kiwameId": 76,
+    "extraIds": []
+  },
+  {
+    "id": 77,
+    "name": "小龍景光",
+    "type": "太刀",
+    "school": "長船",
+    "kiwameId": 78,
+    "extraIds": []
+  },
+  {
+    "id": 79,
+    "name": "江雪左文字",
+    "type": "太刀",
+    "school": "左文字",
+    "kiwameId": 80,
+    "extraIds": []
+  },
+  {
+    "id": 81,
+    "name": "宗三左文字",
+    "type": "打刀",
+    "school": "左文字",
+    "kiwameId": 82,
+    "extraIds": []
+  },
+  {
+    "id": 83,
+    "name": "小夜左文字",
+    "type": "短刀",
+    "school": "左文字",
+    "kiwameId": 84,
+    "extraIds": []
+  },
+  {
+    "id": 85,
+    "name": "加州清光",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 86,
+    "extraIds": []
+  },
+  {
+    "id": 87,
+    "name": "大和守安定",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 88,
+    "extraIds": []
+  },
+  {
+    "id": 89,
+    "name": "歌仙兼定",
+    "type": "打刀",
+    "school": "兼定",
+    "kiwameId": 90,
+    "extraIds": []
+  },
+  {
+    "id": 91,
+    "name": "和泉守兼定",
+    "type": "打刀",
+    "school": "兼定",
+    "kiwameId": 92,
+    "extraIds": []
+  },
+  {
+    "id": 93,
+    "name": "陸奧守吉行",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 94,
+    "extraIds": []
+  },
+  {
+    "id": 95,
+    "name": "山姥切國廣",
+    "type": "打刀",
+    "school": "堀川",
+    "kiwameId": 96,
+    "extraIds": []
+  },
+  {
+    "id": 97,
+    "name": "山伏國廣",
+    "type": "太刀",
+    "school": "堀川",
+    "kiwameId": 98,
+    "extraIds": []
+  },
+  {
+    "id": 99,
+    "name": "堀川國廣",
+    "type": "脇差",
+    "school": "堀川",
+    "kiwameId": 100,
+    "extraIds": []
+  },
+  {
+    "id": 101,
+    "name": "蜂須賀虎徹",
+    "type": "打刀",
+    "school": "虎徹",
+    "kiwameId": 102,
+    "extraIds": []
+  },
+  {
+    "id": 103,
+    "name": "浦島虎徹",
+    "type": "脇差",
+    "school": "虎徹",
+    "kiwameId": 104,
+    "extraIds": []
+  },
+  {
+    "id": 105,
+    "name": "長曾禰虎徹",
+    "type": "打刀",
+    "school": "虎徹…？",
+    "kiwameId": 106,
+    "extraIds": []
+  },
+  {
+    "id": 107,
+    "name": "髭切",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": [
+      108,
+      109,
+      110,
+      111
+    ],
+    "note": "刀帐多个编号均为本人"
+  },
+  {
+    "id": 112,
+    "name": "膝丸",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": [
+      113,
+      114,
+      115
+    ],
+    "note": "刀帐多个编号均为本人"
+  },
+  {
+    "id": 116,
+    "name": "大俱利伽羅",
+    "type": "打刀",
+    "school": "廣光",
+    "kiwameId": 117,
+    "extraIds": []
+  },
+  {
+    "id": 118,
+    "name": "壓切長谷部",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 119,
+    "extraIds": []
+  },
+  {
+    "id": 120,
+    "name": "不動行光",
+    "type": "短刀",
+    "school": "",
+    "kiwameId": 121,
+    "extraIds": []
+  },
+  {
+    "id": 122,
+    "name": "獅子王",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": 123,
+    "extraIds": []
+  },
+  {
+    "id": 124,
+    "name": "小烏丸",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": 125,
+    "extraIds": []
+  },
+  {
+    "id": 126,
+    "name": "拔丸",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 128,
+    "name": "同田貫正國",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 129,
+    "extraIds": []
+  },
+  {
+    "id": 130,
+    "name": "鶴丸國永",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": 131,
+    "extraIds": []
+  },
+  {
+    "id": 132,
+    "name": "太郎太刀",
+    "type": "大太刀",
+    "school": "",
+    "kiwameId": 133,
+    "extraIds": []
+  },
+  {
+    "id": 134,
+    "name": "次郎太刀",
+    "type": "大太刀",
+    "school": "",
+    "kiwameId": 135,
+    "extraIds": []
+  },
+  {
+    "id": 136,
+    "name": "日本號",
+    "type": "槍",
+    "school": "",
+    "kiwameId": 137,
+    "extraIds": []
+  },
+  {
+    "id": 138,
+    "name": "御手杵",
+    "type": "槍",
+    "school": "",
+    "kiwameId": 139,
+    "extraIds": []
+  },
+  {
+    "id": 140,
+    "name": "巴形薙刀",
+    "type": "薙刀",
+    "school": "",
+    "kiwameId": 141,
+    "extraIds": []
+  },
+  {
+    "id": 142,
+    "name": "毛利藤四郎",
+    "type": "短刀",
+    "school": "粟田口",
+    "kiwameId": 143,
+    "extraIds": []
+  },
+  {
+    "id": 144,
+    "name": "籠手切江",
+    "type": "脇差",
+    "school": "江",
+    "kiwameId": 145,
+    "extraIds": []
+  },
+  {
+    "id": 146,
+    "name": "謙信景光",
+    "type": "短刀",
+    "school": "長船",
+    "kiwameId": 147,
+    "extraIds": []
+  },
+  {
+    "id": 148,
+    "name": "小豆長光",
+    "type": "太刀",
+    "school": "長船",
+    "kiwameId": 149,
+    "extraIds": []
+  },
+  {
+    "id": 150,
+    "name": "日向正宗",
+    "type": "短刀",
+    "school": "正宗",
+    "kiwameId": 151,
+    "extraIds": []
+  },
+  {
+    "id": 152,
+    "name": "靜形薙刀",
+    "type": "薙刀",
+    "school": "",
+    "kiwameId": 153,
+    "extraIds": []
+  },
+  {
+    "id": 154,
+    "name": "南泉一文字",
+    "type": "打刀",
+    "school": "福岡一文字",
+    "kiwameId": 155,
+    "extraIds": []
+  },
+  {
+    "id": 156,
+    "name": "千代金丸",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": 157,
+    "extraIds": []
+  },
+  {
+    "id": 158,
+    "name": "山姥切長義",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 159,
+    "extraIds": []
+  },
+  {
+    "id": 160,
+    "name": "豐前江",
+    "type": "打刀",
+    "school": "江",
+    "kiwameId": 161,
+    "extraIds": []
+  },
+  {
+    "id": 162,
+    "name": "禰禰切丸",
+    "type": "大太刀",
+    "school": "",
+    "kiwameId": 163,
+    "extraIds": []
+  },
+  {
+    "id": 164,
+    "name": "白山吉光",
+    "type": "劍",
+    "school": "粟田口",
+    "kiwameId": 165,
+    "extraIds": []
+  },
+  {
+    "id": 166,
+    "name": "南海太郎朝尊",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 167,
+    "extraIds": []
+  },
+  {
+    "id": 168,
+    "name": "肥前忠廣",
+    "type": "脇差",
+    "school": "",
+    "kiwameId": 169,
+    "extraIds": []
+  },
+  {
+    "id": 170,
+    "name": "北谷菜切",
+    "type": "短刀",
+    "school": "",
+    "kiwameId": 171,
+    "extraIds": []
+  },
+  {
+    "id": 172,
+    "name": "桑名江",
+    "type": "打刀",
+    "school": "江",
+    "kiwameId": 173,
+    "extraIds": []
+  },
+  {
+    "id": 174,
+    "name": "水心子正秀",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 175,
+    "extraIds": []
+  },
+  {
+    "id": 176,
+    "name": "源清麿",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": 177,
+    "extraIds": []
+  },
+  {
+    "id": 178,
+    "name": "松井江",
+    "type": "打刀",
+    "school": "江",
+    "kiwameId": 179,
+    "extraIds": []
+  },
+  {
+    "id": 180,
+    "name": "山鳥毛",
+    "type": "太刀",
+    "school": "福岡一文字",
+    "kiwameId": 181,
+    "extraIds": []
+  },
+  {
+    "id": 182,
+    "name": "古今傳授之太刀",
+    "type": "太刀",
+    "school": "豐後國行平",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 184,
+    "name": "地藏行平",
+    "type": "打刀",
+    "school": "豐後國行平",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 186,
+    "name": "治金丸",
+    "type": "脇差",
+    "school": "",
+    "kiwameId": 187,
+    "extraIds": []
+  },
+  {
+    "id": 188,
+    "name": "日光一文字",
+    "type": "太刀",
+    "school": "福岡一文字",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 190,
+    "name": "太閤左文字",
+    "type": "短刀",
+    "school": "左文字",
+    "kiwameId": 191,
+    "extraIds": []
+  },
+  {
+    "id": 192,
+    "name": "五月雨江",
+    "type": "打刀",
+    "school": "江",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 194,
+    "name": "大千鳥十文字槍",
+    "type": "槍",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 196,
+    "name": "泛塵",
+    "type": "脇差",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 198,
+    "name": "一文字則宗",
+    "type": "太刀",
+    "school": "福岡一文字",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 200,
+    "name": "村雲江",
+    "type": "打刀",
+    "school": "江",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 202,
+    "name": "姬鶴一文字",
+    "type": "太刀",
+    "school": "福岡一文字",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 204,
+    "name": "福島光忠",
+    "type": "太刀",
+    "school": "長船",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 206,
+    "name": "七星劍",
+    "type": "劍",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 208,
+    "name": "丙子椒林劍",
+    "type": "劍",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 210,
+    "name": "稻葉江",
+    "type": "打刀",
+    "school": "江",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 212,
+    "name": "笹貫",
+    "type": "太刀",
+    "school": "波平",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 214,
+    "name": "人間無骨",
+    "type": "槍",
+    "school": "兼定",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 216,
+    "name": "八丁念佛",
+    "type": "太刀",
+    "school": "古備前",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 218,
+    "name": "石田正宗",
+    "type": "打刀",
+    "school": "正宗",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 220,
+    "name": "實休光忠",
+    "type": "太刀",
+    "school": "長船",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 222,
+    "name": "京極正宗",
+    "type": "短刀",
+    "school": "正宗",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 224,
+    "name": "孫六兼元",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 226,
+    "name": "後家兼光",
+    "type": "打刀",
+    "school": "長船",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 228,
+    "name": "火車切",
+    "type": "脇差",
+    "school": "廣光",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 230,
+    "name": "富田江",
+    "type": "打刀",
+    "school": "江",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 232,
+    "name": "大慶直胤",
+    "type": "打刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 234,
+    "name": "九鬼正宗",
+    "type": "短刀",
+    "school": "正宗",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 236,
+    "name": "雲生",
+    "type": "太刀",
+    "school": "鵜飼",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 238,
+    "name": "道譽一文字",
+    "type": "太刀",
+    "school": "福岡一文字",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 240,
+    "name": "雲次",
+    "type": "太刀",
+    "school": "鵜飼",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 242,
+    "name": "面影",
+    "type": "太刀",
+    "school": "來",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 244,
+    "name": "古備前信房",
+    "type": "太刀",
+    "school": "古備前",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 246,
+    "name": "俱利伽羅江",
+    "type": "短刀",
+    "school": "江",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 248,
+    "name": "三郎國宗",
+    "type": "太刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 250,
+    "name": "安宅切",
+    "type": "打刀",
+    "school": "長船",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 252,
+    "name": "二筋樋貞宗",
+    "type": "打刀",
+    "school": "貞宗",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 254,
+    "name": "雲重",
+    "type": "打刀",
+    "school": "鵜飼",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 256,
+    "name": "柏太刀",
+    "type": "大太刀",
+    "school": "",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 258,
+    "name": "波平行安",
+    "type": "太刀",
+    "school": "波平",
+    "kiwameId": null,
+    "extraIds": []
+  },
+  {
+    "id": 260,
+    "name": "狐崎為次",
+    "type": "太刀",
+    "school": "青江",
+    "kiwameId": null,
+    "extraIds": []
+  }
+]

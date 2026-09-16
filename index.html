@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>刀帳收集记录</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F3F3F0;
+  --card: #FFFFFF;
+  --ink: #2B2A28;
+  --ink-2: #6A6862;
+  --faint: #B3B1AA;
+  --line: #DDDBD4;
+  --accent: #8F7021;
+  --accent-ink: #FFFFFF;
+  --gold: #A07B1F;
+  --gold-soft: #F3EBD4;
+  --blossom: #E6B8C0;
+  --danger: #973838;
+  --p0: #4E79A7; --p1: #4F9A84; --p2: #5E6DA8; --p3: #B08633;
+  --p4: #A05A74; --p5: #74873A; --p6: #C06C3A; --p7: #7C68A6; --p8: #8C8F99;
+  --font-name: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Noto Serif CJK JP", "Source Han Serif JP", "Noto Serif CJK TC", "Songti TC", "Songti SC", "MS Mincho", serif;
+  --font-ui: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans CJK TC", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #161519; --card: #201F24; --ink: #ECE8DF; --ink-2: #B8B3A8; --faint: #625E66;
+    --line: #36333B; --accent: #D4B45E; --accent-ink: #161519; --gold: #E2C06C; --gold-soft: #3B3220;
+    --blossom: #8A5A63;
+    --danger: #E38C8C;
+    --p0: #6F97C6; --p1: #62B39A; --p2: #8C9AD6; --p3: #CFA451; --p4: #C47C97; --p5: #98AD55;
+    --p6: #DB8A55; --p7: #A28FCC; --p8: #7D8190;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #161519; --card: #201F24; --ink: #ECE8DF; --ink-2: #B8B3A8; --faint: #625E66;
+  --line: #36333B; --accent: #D4B45E; --accent-ink: #161519; --gold: #E2C06C; --gold-soft: #3B3220;
+  --blossom: #8A5A63;
+  --danger: #E38C8C;
+  --p0: #6F97C6; --p1: #62B39A; --p2: #8C9AD6; --p3: #CFA451; --p4: #C47C97; --p5: #98AD55;
+  --p6: #DB8A55; --p7: #A28FCC; --p8: #7D8190;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+button, select, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+/* Header */
+.top { border-bottom: 1px solid var(--line); background: var(--paper); position: sticky; top: 0; z-index: 5; }
+.top-inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 10px; }
+h1 { margin: 0; display: flex; align-items: baseline; gap: 10px; }
+.h1-mark { font-family: var(--font-name); font-weight: 700; font-size: 36px; letter-spacing: .16em; line-height: 1; }
+.h1-sub { font-size: 14px; font-weight: 500; color: var(--ink-2); }
+.tally { margin: 0; font-size: 14px; color: var(--ink-2); text-align: right; }
+.tally strong { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.tally .sync { display: block; font-size: 12px; color: var(--faint); }
+.progress { height: 3px; background: var(--line); }
+.progress > div { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--gold)); transition: width .3s ease; }
+.tabs { display: flex; gap: 4px; }
+.tabs button {
+  border: 0; background: none; padding: 10px 14px 9px; color: var(--ink-2);
+  border-bottom: 2px solid transparent; font-weight: 500;
+}
+.tabs button { font-family: var(--font-name); font-size: 16px; letter-spacing: .08em; }
+.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Filters */
+.filters { padding-top: 20px; padding-bottom: 8px; }
+.filter-box { border: 1px solid var(--line); background: var(--card); padding: 16px 20px 14px; }
+.filter-title {
+  margin: 0 0 12px; font-family: var(--font-name); font-weight: 700; font-size: 17px;
+  letter-spacing: .12em; color: var(--accent); display: flex; align-items: center; gap: 8px;
+}
+.filter-title::before { content: "✿"; font-size: 18px; line-height: 1; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 1px solid var(--line); background: var(--card); border-radius: 999px;
+  padding: 4px 12px; font-size: 14px; min-height: 34px;
+}
+.chip small { color: var(--ink-2); margin-left: 4px; font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chip[aria-pressed="true"] small { color: var(--accent-ink); opacity: .8; }
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-top: 12px; }
+.filter-row label { display: flex; align-items: center; gap: 10px; font-family: var(--font-name); font-size: 15px; color: var(--ink); }
+select {
+  background: var(--card); border: 1px solid var(--line); border-radius: 2px;
+  padding: 6px 10px; min-height: 38px; min-width: 150px; max-width: 60vw; font-family: var(--font-name);
+}
+.result-line { display: flex; align-items: center; gap: 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink-2); min-height: 28px; }
+.linkish { border: 0; background: none; color: var(--accent); padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
+.hint { font-size: 13px; color: var(--ink-2); margin: 6px 0 0; }
+
+/* Grid of cards */
+.grid {
+  list-style: none; margin: 8px auto 48px; padding-top: 4px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 10px;
+}
+.card { position: relative; display: flex; flex-direction: column; }
+.card-main {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  width: 100%; min-height: 206px; padding: 8px 4px 8px;
+  border: 1px dashed var(--line); border-radius: 4px;
+  background: transparent; color: var(--faint);
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.card.owned .card-main { border-style: solid; background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgba(60, 50, 20, .06); }
+.card.kiwa .card-main {
+  border-color: var(--gold);
+  box-shadow: inset 0 0 0 2px var(--card), inset 0 0 0 3px var(--gold), 0 1px 2px rgba(60, 50, 20, .08);
+  background: linear-gradient(180deg, var(--card) 70%, var(--gold-soft));
+}
+.card-top { align-self: stretch; display: flex; justify-content: space-between; align-items: flex-start; padding: 0 2px; }
+.no { font-family: var(--font-name); font-size: 11px; font-variant-numeric: tabular-nums; padding-top: 1px; white-space: nowrap; }
+.emblem {
+  flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid currentColor; font-family: var(--font-name); font-weight: 800;
+  font-size: 13px; line-height: 1;
+}
+.emblem.two { font-size: 9px; letter-spacing: -.02em; }
+.card.owned .emblem {
+  color: var(--accent-ink); border-color: var(--accent);
+  background: radial-gradient(circle at 35% 30%, var(--gold), var(--accent));
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 3px var(--accent);
+}
+.card.owned .no { color: var(--ink-2); }
+.name {
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-family: var(--font-name); font-weight: 700; font-size: 18px;
+  letter-spacing: .1em; line-height: 1.05; margin: 6px 0; white-space: nowrap;
+}
+.name.long { font-size: 15px; }
+.name.xlong { font-size: 13px; }
+.meta { font-size: 11px; line-height: 1.45; text-align: center; }
+.card.owned .meta { color: var(--ink-2); }
+.meta .date { display: block; font-variant-numeric: tabular-nums; }
+.seal {
+  position: absolute; top: 34px; right: 5px; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold); color: var(--card); font-family: var(--font-name); font-weight: 800;
+  font-size: 11px; line-height: 20px; text-align: center;
+}
+.card-foot { display: flex; gap: 4px; margin-top: 4px; }
+.card-foot button {
+  flex: 1; min-height: 32px; font-size: 13px; padding: 0;
+  border: 1px solid var(--line); background: transparent; color: var(--ink-2); border-radius: 4px;
+}
+.card:not(.owned) .card-foot button { color: var(--faint); }
+.kiwa-btn { font-family: var(--font-name); font-weight: 700; }
+.kiwa-btn[aria-pressed="true"] { background: var(--gold-soft); border-color: var(--gold); color: var(--accent); }
+.card-foot button { font-family: var(--font-name); border-radius: 2px; }
+.empty { grid-column: 1 / -1; padding: 40px 0; text-align: center; color: var(--ink-2); }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding-top: 16px; padding-bottom: 48px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 2px; padding: 18px; min-width: 0; }
+.panel.wide { grid-column: 1 / -1; }
+.panel h2 { font-family: var(--font-name); font-size: 18px; letter-spacing: .1em; margin: 0; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.panel h2::before { content: "✿"; color: var(--accent); font-size: 16px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { border: 0; background: transparent; padding: 5px 12px; font-size: 13px; color: var(--ink-2); min-height: 32px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.pie-wrap { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+#pie { width: 200px; height: 200px; flex: none; max-width: 100%; }
+.legend { list-style: none; margin: 0; padding: 0; flex: 1; min-width: 180px; max-width: 380px; font-size: 14px; }
+.legend li { display: grid; grid-template-columns: 12px 1fr auto auto; gap: 8px; align-items: center; padding: 3px 0; }
+.legend .sw { width: 12px; height: 12px; border-radius: 50%; }
+.legend .n, .legend .pct { font-variant-numeric: tabular-nums; color: var(--ink-2); text-align: right; }
+.legend .pct { min-width: 3.4em; }
+.summary { display: flex; gap: 28px; flex-wrap: wrap; }
+.summary div { font-size: 13px; color: var(--ink-2); }
+.summary b { display: block; font-family: var(--font-name); font-size: 28px; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 700; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 7px 6px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-weight: 500; color: var(--ink-2); font-size: 12px; }
+td.num { font-variant-numeric: tabular-nums; text-align: right; }
+th.num { text-align: right; }
+.bar-cell { width: 45%; min-width: 120px; }
+.bar { display: flex; align-items: center; gap: 8px; }
+.bar-track { flex: 1; height: 8px; background: var(--paper); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold)); border-radius: 4px; }
+.bar-pct { font-variant-numeric: tabular-nums; min-width: 3.2em; text-align: right; font-size: 13px; }
+.kcell { color: var(--gold); }
+
+/* Backup */
+.backup { padding-top: 16px; padding-bottom: 48px; max-width: 720px; }
+.backup p { margin: 8px 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+  border-radius: 999px; padding: 7px 20px; min-height: 40px; font-weight: 500;
+  font-family: var(--font-name); letter-spacing: .08em;
+}
+.btn.ghost { background: var(--card); color: var(--accent); border-color: var(--accent); }
+.btn.danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+.filebtn { position: relative; overflow: hidden; }
+.filebtn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+textarea {
+  width: 100%; min-height: 140px; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 6px; padding: 10px; font-size: 13px; resize: vertical;
+}
+details { margin-top: 10px; }
+summary { cursor: pointer; color: var(--ink-2); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-ok { color: var(--ink); }
+.status-warn { color: var(--danger); }
+
+/* Dialogs */
+dialog {
+  border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink);
+  padding: 20px; width: min(380px, calc(100vw - 32px));
+}
+dialog::backdrop { background: rgba(10, 12, 20, .45); }
+dialog h2 { margin: 0; font-family: var(--font-name); font-size: 26px; letter-spacing: .1em; }
+dialog { border-radius: 2px; box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px var(--gold-soft); }
+dialog .dmeta { margin: 2px 0 14px; color: var(--ink-2); font-size: 13px; }
+.field { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.field input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); }
+.field.date { flex-wrap: wrap; }
+.field input[type="date"] {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; min-height: 36px;
+}
+.field .muted { color: var(--faint); font-size: 13px; }
+dialog menu { display: flex; justify-content: flex-end; gap: 8px; padding: 0; margin: 16px 0 0; }
+
+/* Footer */
+.site-foot { border-top: 1px solid var(--line); padding: 28px 0 44px; text-align: center; }
+.site-foot p { margin: 0 auto; max-width: 62ch; }
+.foot-mark { color: var(--accent); font-size: 16px; line-height: 1; margin-bottom: 10px !important; }
+.foot-author { font-family: var(--font-name); font-size: 15px; letter-spacing: .06em; color: var(--ink); margin-bottom: 10px !important; }
+.foot-author a { color: var(--accent); text-underline-offset: 3px; }
+.foot-note { font-size: 12px; line-height: 1.8; color: var(--ink-2); }
+
+/* Toast */
+.toast {
+  position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 16px);
+  background: var(--ink); color: var(--paper); border-radius: 8px;
+  padding: 8px 8px 8px 16px; display: flex; align-items: center; gap: 12px;
+  font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+  max-width: calc(100vw - 32px); z-index: 20;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.toast #toastMsg { flex: 1; min-width: 0; }
+.toast button { flex: none; white-space: nowrap; border: 0; background: transparent; color: var(--paper); font-weight: 700; padding: 6px 10px; text-decoration: underline; }
+
+@media (max-width: 720px) {
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .h1-mark { font-size: 28px; }
+  .tally { text-align: left; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 8px; }
+  #pie { width: 170px; height: 170px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <h1><span class="h1-mark" lang="ja">刀帳</span><span class="h1-sub">收集记录</span></h1>
+    <p class="tally">
+      已拥有 <strong id="tOwned">0</strong> / <span id="tTotal">0</span>，已极化 <strong id="tKiwa">0</strong> / <span id="tKiwaTotal">0</span>
+      <span class="sync" id="syncLine">改动保存在本地浏览器里</span>
+    </p>
+  </div>
+  <div class="progress" aria-hidden="true"><div id="progress"></div></div>
+  <nav class="wrap tabs" role="tablist" aria-label="页面">
+    <button role="tab" id="tab-book" aria-selected="true" aria-controls="view-book" data-tab="book">刀帐</button>
+    <button role="tab" id="tab-stats" aria-selected="false" aria-controls="view-stats" data-tab="stats">统计</button>
+    <button role="tab" id="tab-backup" aria-selected="false" aria-controls="view-backup" data-tab="backup">备份</button>
+  </nav>
+</header>
+
+<main>
+  <section id="view-book" role="tabpanel" aria-labelledby="tab-book">
+    <div class="wrap filters">
+      <div class="filter-box">
+      <p class="filter-title">筛选</p>
+      <div class="chips" id="typeChips" role="group" aria-label="按刀种筛选"></div>
+      <div class="filter-row">
+        <label>刀派·刀工 <select id="schoolSel"></select></label>
+        <label>状态
+          <select id="statusSel">
+            <option value="all">全部</option>
+            <option value="owned">已拥有</option>
+            <option value="missing">未拥有</option>
+            <option value="kiwa">已极化</option>
+            <option value="kiwaTodo">已拥有、尚未极化</option>
+          </select>
+        </label>
+      </div>
+      </div>
+      <p class="hint">点击卡片标记拥有或取消。点击「極」标记极化，点击「详情」录入入手日期。</p>
+      <div class="result-line"><span id="resultCount"></span><button class="linkish" id="clearFilters" hidden>清除筛选</button></div>
+    </div>
+    <ol class="wrap grid" id="grid"></ol>
+  </section>
+
+  <section id="view-stats" role="tabpanel" aria-labelledby="tab-stats" hidden>
+    <div class="wrap stats">
+      <div class="panel wide">
+        <div class="summary" id="summary"></div>
+      </div>
+      <div class="panel wide">
+        <div class="panel-head">
+          <h2>现有刀剑构成</h2>
+          <div class="seg" role="group" aria-label="饼图分组">
+            <button data-pie="type" aria-pressed="true">按刀种</button>
+            <button data-pie="school" aria-pressed="false">按刀派·刀工</button>
+          </div>
+        </div>
+        <div class="pie-wrap">
+          <svg id="pie" viewBox="0 0 200 200" role="img" aria-labelledby="pieTitle"><title id="pieTitle">现有刀剑构成饼图</title></svg>
+          <ul class="legend" id="legend"></ul>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>刀种收集率</h2></div>
+        <div class="table-scroll"><table id="typeTable"></table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>刀派·刀工收集率</h2></div>
+        <div class="table-scroll"><table id="schoolTable"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-backup" role="tabpanel" aria-labelledby="tab-backup" hidden>
+    <div class="wrap backup">
+      <div class="panel">
+        <h2>保存与备份</h2>
+        <p id="storeStatus"></p>
+        <div class="actions">
+          <button class="btn" id="exportBtn">导出记录（JSON）</button>
+          <label class="btn ghost filebtn">从文件导入<input type="file" id="importFile" accept=".json,application/json"></label>
+        </div>
+        <details>
+          <summary>粘贴 JSON 导入</summary>
+          <textarea id="importText" placeholder="把导出的 JSON 内容粘贴到这里"></textarea>
+          <div class="actions"><button class="btn ghost" id="importTextBtn">导入粘贴的内容</button></div>
+        </details>
+        <hr>
+        <p class="hint">清空后所有拥有、极化和日期记录都会删除。建议先导出一份备份。</p>
+        <div class="actions"><button class="btn danger" id="resetBtn">清空全部记录</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p class="foot-mark" aria-hidden="true">✿</p>
+    <p class="foot-author" id="footAuthor" hidden></p>
+    <p class="foot-note">本页面是个人制作的非官方粉丝工具，与「刀剣乱舞ONLINE」官方及 EXNOA LLC、Nitroplus 无关。游戏相关名称及权利归各自权利人所有。</p>
+    <p class="foot-note">刀剑名单与分类整理自萌娘百科，可能有错漏或更新不及时，请以游戏内信息为准。你的收集记录只有你自己能看到。</p>
+  </div>
+</footer>
+
+<dialog id="editDlg" aria-labelledby="dlgName">
+  <form method="dialog">
+    <h2 id="dlgName" lang="ja"></h2>
+    <p class="dmeta" id="dlgMeta"></p>
+    <label class="field"><input type="checkbox" id="dlgOwned"> 已拥有</label>
+    <label class="field" id="dlgKiwaRow"><input type="checkbox" id="dlgKiwa"> 已极化</label>
+    <p class="field" id="dlgNoKiwa"><span class="muted">这把刀暂时没有极</span></p>
+    <div class="field date">
+      <label for="dlgDate">入手日期</label>
+      <input type="date" id="dlgDate">
+      <button type="button" class="linkish" id="dlgClearDate">清除</button>
+      <span class="muted">可以不填</span>
+    </div>
+    <menu>
+      <button class="btn ghost" value="cancel">取消</button>
+      <button class="btn" value="save">保存</button>
+    </menu>
+  </form>
+</dialog>
+
+<dialog id="confirmDlg" aria-labelledby="confirmMsg">
+  <form method="dialog">
+    <p id="confirmMsg" style="margin:0"></p>
+    <menu>
+      <button class="btn ghost" value="cancel">取消</button>
+      <button class="btn" value="ok" id="confirmOk">确定</button>
+    </menu>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastUndo" hidden>撤销</button></div>
+
+<script>
+/* ===== 署名设置：只需要改这两行 ===== */
+const AUTHOR_NAME = "青丹 千代";   // 页面底部显示的署名，例如 "某某"；留空则不显示署名
+const AUTHOR_LINK = "";   // 可选：点击署名跳转的网址，例如 "https://github.com/你的用户名"
+/* ==================================== */
+
+const SWORDS = [{"id":0,"name":"童子切安綱 剝落","type":"太刀","school":"","kiwameId":null,"extraIds":[]},{"id":3,"name":"三日月宗近","type":"太刀","school":"三條","kiwameId":4,"extraIds":[]},{"id":5,"name":"小狐丸","type":"太刀","school":"三條","kiwameId":6,"extraIds":[]},{"id":7,"name":"石切丸","type":"大太刀","school":"三條","kiwameId":8,"extraIds":[]},{"id":9,"name":"岩融","type":"薙刀","school":"三條","kiwameId":10,"extraIds":[]},{"id":11,"name":"今劍","type":"短刀","school":"三條","kiwameId":12,"extraIds":[]},{"id":13,"name":"大典太光世","type":"太刀","school":"三池","kiwameId":14,"extraIds":[]},{"id":15,"name":"騷速劍","type":"太刀","school":"三池","kiwameId":16,"extraIds":[]},{"id":17,"name":"數珠丸恆次","type":"太刀","school":"青江","kiwameId":18,"extraIds":[]},{"id":19,"name":"笑面青江","type":"脇差","school":"青江","kiwameId":20,"extraIds":[]},{"id":21,"name":"鬼丸國綱","type":"太刀","school":"粟田口","kiwameId":22,"extraIds":[]},{"id":23,"name":"鳴狐","type":"打刀","school":"粟田口","kiwameId":24,"extraIds":[]},{"id":25,"name":"一期一振","type":"太刀","school":"粟田口","kiwameId":26,"extraIds":[]},{"id":27,"name":"鯰尾藤四郎","type":"脇差","school":"粟田口","kiwameId":28,"extraIds":[]},{"id":29,"name":"骨喰藤四郎","type":"脇差","school":"粟田口","kiwameId":30,"extraIds":[]},{"id":31,"name":"平野藤四郎","type":"短刀","school":"粟田口","kiwameId":32,"extraIds":[]},{"id":33,"name":"厚藤四郎","type":"短刀","school":"粟田口","kiwameId":34,"extraIds":[]},{"id":35,"name":"後藤藤四郎","type":"短刀","school":"粟田口","kiwameId":36,"extraIds":[]},{"id":37,"name":"信濃藤四郎","type":"短刀","school":"粟田口","kiwameId":38,"extraIds":[]},{"id":39,"name":"前田藤四郎","type":"短刀","school":"粟田口","kiwameId":40,"extraIds":[]},{"id":41,"name":"秋田藤四郎","type":"短刀","school":"粟田口","kiwameId":42,"extraIds":[]},{"id":43,"name":"博多藤四郎","type":"短刀","school":"粟田口","kiwameId":44,"extraIds":[]},{"id":45,"name":"亂藤四郎","type":"短刀","school":"粟田口","kiwameId":46,"extraIds":[]},{"id":47,"name":"五虎退","type":"短刀","school":"粟田口","kiwameId":48,"extraIds":[]},{"id":49,"name":"藥研藤四郎","type":"短刀","school":"粟田口","kiwameId":50,"extraIds":[]},{"id":51,"name":"包丁藤四郎","type":"短刀","school":"粟田口","kiwameId":52,"extraIds":[]},{"id":53,"name":"大包平","type":"太刀","school":"古備前","kiwameId":54,"extraIds":[]},{"id":55,"name":"鶯丸","type":"太刀","school":"古備前","kiwameId":56,"extraIds":[]},{"id":57,"name":"明石國行","type":"太刀","school":"來","kiwameId":58,"extraIds":[]},{"id":59,"name":"螢丸","type":"大太刀","school":"來","kiwameId":60,"extraIds":[]},{"id":61,"name":"愛染國俊","type":"短刀","school":"來","kiwameId":62,"extraIds":[]},{"id":63,"name":"千子村正","type":"打刀","school":"村正","kiwameId":64,"extraIds":[]},{"id":65,"name":"蜻蛉切","type":"槍","school":"村正","kiwameId":66,"extraIds":[]},{"id":67,"name":"物吉貞宗","type":"脇差","school":"貞宗","kiwameId":68,"extraIds":[]},{"id":69,"name":"太鼓鐘貞宗","type":"短刀","school":"貞宗","kiwameId":70,"extraIds":[]},{"id":71,"name":"龜甲貞宗","type":"打刀","school":"貞宗","kiwameId":72,"extraIds":[]},{"id":73,"name":"燭台切光忠","type":"太刀","school":"長船","kiwameId":74,"extraIds":[]},{"id":75,"name":"大般若長光","type":"太刀","school":"長船","kiwameId":76,"extraIds":[]},{"id":77,"name":"小龍景光","type":"太刀","school":"長船","kiwameId":78,"extraIds":[]},{"id":79,"name":"江雪左文字","type":"太刀","school":"左文字","kiwameId":80,"extraIds":[]},{"id":81,"name":"宗三左文字","type":"打刀","school":"左文字","kiwameId":82,"extraIds":[]},{"id":83,"name":"小夜左文字","type":"短刀","school":"左文字","kiwameId":84,"extraIds":[]},{"id":85,"name":"加州清光","type":"打刀","school":"","kiwameId":86,"extraIds":[]},{"id":87,"name":"大和守安定","type":"打刀","school":"","kiwameId":88,"extraIds":[]},{"id":89,"name":"歌仙兼定","type":"打刀","school":"兼定","kiwameId":90,"extraIds":[]},{"id":91,"name":"和泉守兼定","type":"打刀","school":"兼定","kiwameId":92,"extraIds":[]},{"id":93,"name":"陸奧守吉行","type":"打刀","school":"","kiwameId":94,"extraIds":[]},{"id":95,"name":"山姥切國廣","type":"打刀","school":"堀川","kiwameId":96,"extraIds":[]},{"id":97,"name":"山伏國廣","type":"太刀","school":"堀川","kiwameId":98,"extraIds":[]},{"id":99,"name":"堀川國廣","type":"脇差","school":"堀川","kiwameId":100,"extraIds":[]},{"id":101,"name":"蜂須賀虎徹","type":"打刀","school":"虎徹","kiwameId":102,"extraIds":[]},{"id":103,"name":"浦島虎徹","type":"脇差","school":"虎徹","kiwameId":104,"extraIds":[]},{"id":105,"name":"長曾禰虎徹","type":"打刀","school":"虎徹…？","kiwameId":106,"extraIds":[]},{"id":107,"name":"髭切","type":"太刀","school":"","kiwameId":null,"extraIds":[108,109,110,111],"note":"刀帐多个编号均为本人"},{"id":112,"name":"膝丸","type":"太刀","school":"","kiwameId":null,"extraIds":[113,114,115],"note":"刀帐多个编号均为本人"},{"id":116,"name":"大俱利伽羅","type":"打刀","school":"廣光","kiwameId":117,"extraIds":[]},{"id":118,"name":"壓切長谷部","type":"打刀","school":"","kiwameId":119,"extraIds":[]},{"id":120,"name":"不動行光","type":"短刀","school":"","kiwameId":121,"extraIds":[]},{"id":122,"name":"獅子王","type":"太刀","school":"","kiwameId":123,"extraIds":[]},{"id":124,"name":"小烏丸","type":"太刀","school":"","kiwameId":125,"extraIds":[]},{"id":126,"name":"拔丸","type":"太刀","school":"","kiwameId":null,"extraIds":[]},{"id":128,"name":"同田貫正國","type":"打刀","school":"","kiwameId":129,"extraIds":[]},{"id":130,"name":"鶴丸國永","type":"太刀","school":"","kiwameId":131,"extraIds":[]},{"id":132,"name":"太郎太刀","type":"大太刀","school":"","kiwameId":133,"extraIds":[]},{"id":134,"name":"次郎太刀","type":"大太刀","school":"","kiwameId":135,"extraIds":[]},{"id":136,"name":"日本號","type":"槍","school":"","kiwameId":137,"extraIds":[]},{"id":138,"name":"御手杵","type":"槍","school":"","kiwameId":139,"extraIds":[]},{"id":140,"name":"巴形薙刀","type":"薙刀","school":"","kiwameId":141,"extraIds":[]},{"id":142,"name":"毛利藤四郎","type":"短刀","school":"粟田口","kiwameId":143,"extraIds":[]},{"id":144,"name":"籠手切江","type":"脇差","school":"江","kiwameId":145,"extraIds":[]},{"id":146,"name":"謙信景光","type":"短刀","school":"長船","kiwameId":147,"extraIds":[]},{"id":148,"name":"小豆長光","type":"太刀","school":"長船","kiwameId":149,"extraIds":[]},{"id":150,"name":"日向正宗","type":"短刀","school":"正宗","kiwameId":151,"extraIds":[]},{"id":152,"name":"靜形薙刀","type":"薙刀","school":"","kiwameId":153,"extraIds":[]},{"id":154,"name":"南泉一文字","type":"打刀","school":"福岡一文字","kiwameId":155,"extraIds":[]},{"id":156,"name":"千代金丸","type":"太刀","school":"","kiwameId":157,"extraIds":[]},{"id":158,"name":"山姥切長義","type":"打刀","school":"","kiwameId":159,"extraIds":[]},{"id":160,"name":"豐前江","type":"打刀","school":"江","kiwameId":161,"extraIds":[]},{"id":162,"name":"禰禰切丸","type":"大太刀","school":"","kiwameId":163,"extraIds":[]},{"id":164,"name":"白山吉光","type":"劍","school":"粟田口","kiwameId":165,"extraIds":[]},{"id":166,"name":"南海太郎朝尊","type":"打刀","school":"","kiwameId":167,"extraIds":[]},{"id":168,"name":"肥前忠廣","type":"脇差","school":"","kiwameId":169,"extraIds":[]},{"id":170,"name":"北谷菜切","type":"短刀","school":"","kiwameId":171,"extraIds":[]},{"id":172,"name":"桑名江","type":"打刀","school":"江","kiwameId":173,"extraIds":[]},{"id":174,"name":"水心子正秀","type":"打刀","school":"","kiwameId":175,"extraIds":[]},{"id":176,"name":"源清麿","type":"打刀","school":"","kiwameId":177,"extraIds":[]},{"id":178,"name":"松井江","type":"打刀","school":"江","kiwameId":179,"extraIds":[]},{"id":180,"name":"山鳥毛","type":"太刀","school":"福岡一文字","kiwameId":181,"extraIds":[]},{"id":182,"name":"古今傳授之太刀","type":"太刀","school":"豐後國行平","kiwameId":null,"extraIds":[]},{"id":184,"name":"地藏行平","type":"打刀","school":"豐後國行平","kiwameId":null,"extraIds":[]},{"id":186,"name":"治金丸","type":"脇差","school":"","kiwameId":187,"extraIds":[]},{"id":188,"name":"日光一文字","type":"太刀","school":"福岡一文字","kiwameId":null,"extraIds":[]},{"id":190,"name":"太閤左文字","type":"短刀","school":"左文字","kiwameId":191,"extraIds":[]},{"id":192,"name":"五月雨江","type":"打刀","school":"江","kiwameId":null,"extraIds":[]},{"id":194,"name":"大千鳥十文字槍","type":"槍","school":"","kiwameId":null,"extraIds":[]},{"id":196,"name":"泛塵","type":"脇差","school":"","kiwameId":null,"extraIds":[]},{"id":198,"name":"一文字則宗","type":"太刀","school":"福岡一文字","kiwameId":null,"extraIds":[]},{"id":200,"name":"村雲江","type":"打刀","school":"江","kiwameId":null,"extraIds":[]},{"id":202,"name":"姬鶴一文字","type":"太刀","school":"福岡一文字","kiwameId":null,"extraIds":[]},{"id":204,"name":"福島光忠","type":"太刀","school":"長船","kiwameId":null,"extraIds":[]},{"id":206,"name":"七星劍","type":"劍","school":"","kiwameId":null,"extraIds":[]},{"id":208,"name":"丙子椒林劍","type":"劍","school":"","kiwameId":null,"extraIds":[]},{"id":210,"name":"稻葉江","type":"打刀","school":"江","kiwameId":null,"extraIds":[]},{"id":212,"name":"笹貫","type":"太刀","school":"波平","kiwameId":null,"extraIds":[]},{"id":214,"name":"人間無骨","type":"槍","school":"兼定","kiwameId":null,"extraIds":[]},{"id":216,"name":"八丁念佛","type":"太刀","school":"古備前","kiwameId":null,"extraIds":[]},{"id":218,"name":"石田正宗","type":"打刀","school":"正宗","kiwameId":null,"extraIds":[]},{"id":220,"name":"實休光忠","type":"太刀","school":"長船","kiwameId":null,"extraIds":[]},{"id":222,"name":"京極正宗","type":"短刀","school":"正宗","kiwameId":null,"extraIds":[]},{"id":224,"name":"孫六兼元","type":"打刀","school":"","kiwameId":null,"extraIds":[]},{"id":226,"name":"後家兼光","type":"打刀","school":"長船","kiwameId":null,"extraIds":[]},{"id":228,"name":"火車切","type":"脇差","school":"廣光","kiwameId":null,"extraIds":[]},{"id":230,"name":"富田江","type":"打刀","school":"江","kiwameId":null,"extraIds":[]},{"id":232,"name":"大慶直胤","type":"打刀","school":"","kiwameId":null,"extraIds":[]},{"id":234,"name":"九鬼正宗","type":"短刀","school":"正宗","kiwameId":null,"extraIds":[]},{"id":236,"name":"雲生","type":"太刀","school":"鵜飼","kiwameId":null,"extraIds":[]},{"id":238,"name":"道譽一文字","type":"太刀","school":"福岡一文字","kiwameId":null,"extraIds":[]},{"id":240,"name":"雲次","type":"太刀","school":"鵜飼","kiwameId":null,"extraIds":[]},{"id":242,"name":"面影","type":"太刀","school":"來","kiwameId":null,"extraIds":[]},{"id":244,"name":"古備前信房","type":"太刀","school":"古備前","kiwameId":null,"extraIds":[]},{"id":246,"name":"俱利伽羅江","type":"短刀","school":"江","kiwameId":null,"extraIds":[]},{"id":248,"name":"三郎國宗","type":"太刀","school":"","kiwameId":null,"extraIds":[]},{"id":250,"name":"安宅切","type":"打刀","school":"長船","kiwameId":null,"extraIds":[]},{"id":252,"name":"二筋樋貞宗","type":"打刀","school":"貞宗","kiwameId":null,"extraIds":[]},{"id":254,"name":"雲重","type":"打刀","school":"鵜飼","kiwameId":null,"extraIds":[]},{"id":256,"name":"柏太刀","type":"大太刀","school":"","kiwameId":null,"extraIds":[]},{"id":258,"name":"波平行安","type":"太刀","school":"波平","kiwameId":null,"extraIds":[]},{"id":260,"name":"狐崎為次","type":"太刀","school":"青江","kiwameId":null,"extraIds":[]}];
+const TYPES = ["短刀", "脇差", "打刀", "太刀", "大太刀", "槍", "薙刀", "劍"];
+const NONE = "__none";
+const TYPE_MARK = { "短刀": "短", "脇差": "脇", "打刀": "打", "太刀": "太", "大太刀": "大太", "槍": "槍", "薙刀": "薙", "劍": "劍" };
+const LS_KEY = "touken-tracker-v1";
+const byId = new Map(SWORDS.map(s => [String(s.id), s]));
+const kiwaAble = s => s.kiwameId != null || (Array.isArray(s.extraIds) && s.extraIds.length > 0);
+const KIWA_TOTAL = SWORDS.filter(kiwaAble).length;
+const schoolLabel = v => v ? v : "无所属";
+
+let records = {};           // "id" -> { o: true, k?: true, d?: "YYYY-MM-DD" }
+const view = { type: "all", school: "all", status: "all", pie: "type" };
+
+const $ = sel => document.querySelector(sel);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === "class") n.className = v;
+    else if (k === "text") n.textContent = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids) if (c != null) n.append(c);
+  return n;
+};
+
+/* ---------- records ---------- */
+function sanitize(input) {
+  const out = {};
+  if (!input || typeof input !== "object") return out;
+  for (const [key, v] of Object.entries(input)) {
+    const s = byId.get(String(key));
+    if (!s || !v || typeof v !== "object" || !v.o) continue;
+    const r = { o: true };
+    if (v.k && kiwaAble(s)) r.k = true;
+    if (typeof v.d === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v.d)) r.d = v.d;
+    out[String(s.id)] = r;
+  }
+  return out;
+}
+function fromImport(obj) {
+  if (!obj || typeof obj !== "object") return null;
+  if (obj.records && typeof obj.records === "object") return sanitize(obj.records);
+  if (Array.isArray(obj.list)) {
+    const rec = {};
+    for (const it of obj.list) {
+      if (it && it.owned) rec[String(it.id)] = { o: true, k: !!it.kiwame, d: it.date || undefined };
+    }
+    return sanitize(rec);
+  }
+  return null;
+}
+let storageOk = true;
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) return sanitize(JSON.parse(raw).records);
+  } catch (e) {}
+  return {};
+}
+function saveLocal() {
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify({ v: 1, records }));
+    if (!storageOk) { storageOk = true; updateStatus(); }
+  } catch (e) {
+    if (storageOk) { storageOk = false; updateStatus(); }
+  }
+}
+function commit() {
+  saveLocal();
+  renderAll();
+}
+function updateStatus() {
+  const line = $("#syncLine");
+  const box = $("#storeStatus");
+  if (storageOk) {
+    line.textContent = "记录保存在这个浏览器里";
+    box.textContent = "记录保存在这个浏览器里。换设备或清除浏览器数据之前，记得先导出备份。";
+    box.className = "status-ok";
+  } else {
+    line.textContent = "记录暂时无法保存";
+    box.textContent = "这个浏览器不允许网页保存数据（例如开启了无痕模式），关闭页面后记录会丢失。请及时导出备份，或换用普通窗口打开。";
+    box.className = "status-warn";
+  }
+}
+// 同一浏览器里开着多个页面时，保持记录一致
+window.addEventListener("storage", e => {
+  if (e.key !== LS_KEY) return;
+  records = loadLocal();
+  renderAll();
+});
+
+/* ---------- actions ---------- */
+function toggleOwned(id) {
+  const key = String(id);
+  const s = byId.get(key);
+  const prev = records[key] ? { ...records[key] } : null;
+  if (prev) {
+    delete records[key];
+    commit();
+    toast(`已取消拥有 ${s.name}`, () => { records[key] = prev; commit(); });
+  } else {
+    records[key] = { o: true };
+    commit();
+  }
+}
+function toggleKiwa(id) {
+  const key = String(id);
+  const s = byId.get(key);
+  if (!kiwaAble(s)) return;
+  const r = records[key] ? { ...records[key] } : { o: true };
+  if (r.k) delete r.k; else r.k = true;
+  records[key] = r;
+  commit();
+}
+
+/* ---------- book view ---------- */
+function matches(s) {
+  const r = records[s.id];
+  if (view.type !== "all" && s.type !== view.type) return false;
+  if (view.school !== "all") {
+    if (view.school === NONE ? s.school !== "" : s.school !== view.school) return false;
+  }
+  switch (view.status) {
+    case "owned": return !!r;
+    case "missing": return !r;
+    case "kiwa": return !!(r && r.k);
+    case "kiwaTodo": return !!r && kiwaAble(s) && !r.k;
+  }
+  return true;
+}
+function fmtDate(d) { return d ? d.replaceAll("-", ".") : ""; }
+
+function cardFor(s) {
+  const r = records[s.id];
+  const owned = !!r, kiwa = !!(r && r.k);
+  const len = [...s.name].length;
+  const status = owned ? (kiwa ? "已拥有，已极化" : "已拥有") : "未拥有";
+  const main = el("button", {
+    class: "card-main", type: "button", "aria-pressed": String(owned),
+    "aria-label": `No.${s.id} ${s.name}，${s.type}，${status}。点击${owned ? "取消拥有" : "标记为已拥有"}`,
+    onclick: () => toggleOwned(s.id),
+  },
+    el("span", { class: "card-top" },
+      el("span", { class: "emblem" + (TYPE_MARK[s.type].length > 1 ? " two" : ""), lang: "ja", "aria-hidden": "true", text: TYPE_MARK[s.type] }),
+      el("span", { class: "no", text: "No." + s.id })),
+    el("span", { class: "name" + (len >= 8 ? " xlong" : len >= 6 ? " long" : ""), lang: "ja", text: s.name }),
+    el("span", { class: "meta" },
+      document.createTextNode(schoolLabel(s.school)),
+      r && r.d ? el("span", { class: "date", text: fmtDate(r.d) }) : null),
+    kiwa ? el("span", { class: "seal", "aria-hidden": "true", lang: "ja", text: "極" }) : null,
+  );
+  const foot = el("div", { class: "card-foot" },
+    kiwaAble(s) ? el("button", {
+      class: "kiwa-btn", type: "button", "aria-pressed": String(kiwa), lang: "ja",
+      "aria-label": `${s.name} ${kiwa ? "取消极化" : "标记为已极化"}`,
+      onclick: () => toggleKiwa(s.id), text: "極",
+    }) : null,
+    el("button", { type: "button", "aria-label": `${s.name} 详情`, onclick: () => openEdit(s.id), text: "详情" }),
+  );
+  return el("li", { class: "card" + (owned ? " owned" : "") + (kiwa ? " kiwa" : ""), "data-id": s.id }, main, foot);
+}
+
+function renderBook() {
+  const grid = $("#grid");
+  const active = document.activeElement;
+  const activeCard = active && active.closest ? active.closest(".card") : null;
+  const focusId = activeCard ? activeCard.dataset.id : null;
+  const focusIdx = activeCard ? [...activeCard.querySelectorAll("button")].indexOf(active) : -1;
+
+  const shown = SWORDS.filter(matches).sort((a, b) => a.id - b.id);
+  grid.replaceChildren(...(shown.length
+    ? shown.map(cardFor)
+    : [el("li", { class: "empty" }, "没有符合条件的刀剑。")]));
+
+  const filtered = view.type !== "all" || view.school !== "all" || view.status !== "all";
+  $("#resultCount").textContent = filtered ? `筛选出 ${shown.length} 把` : `共 ${shown.length} 把，按刀帐编号排列`;
+  $("#clearFilters").hidden = !filtered;
+
+  if (focusId != null) {
+    const card = grid.querySelector(`.card[data-id="${focusId}"]`);
+    if (card) {
+      const btns = card.querySelectorAll("button");
+      (btns[focusIdx] || btns[0]).focus({ preventScroll: true });
+    }
+  }
+  renderChips();
+}
+
+function renderChips() {
+  const wrap = $("#typeChips");
+  const chip = (value, label, owned, total) => el("button", {
+    class: "chip", type: "button", "aria-pressed": String(view.type === value),
+    onclick: () => { view.type = value; renderBook(); },
+  }, label, el("small", { text: `${owned}/${total}` }));
+  const ownedCount = list => list.filter(s => records[s.id]).length;
+  wrap.replaceChildren(
+    chip("all", "全部", ownedCount(SWORDS), SWORDS.length),
+    ...TYPES.map(t => { const l = SWORDS.filter(s => s.type === t); return chip(t, t, ownedCount(l), l.length); }),
+  );
+}
+
+function buildSchoolSelect() {
+  const counts = new Map();
+  for (const s of SWORDS) counts.set(s.school, (counts.get(s.school) || 0) + 1);
+  const named = [...counts.entries()].filter(([k]) => k !== "").sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh"));
+  const sel = $("#schoolSel");
+  sel.replaceChildren(
+    el("option", { value: "all", text: "全部" }),
+    ...named.map(([k, n]) => el("option", { value: k, text: `${k}（${n}）` })),
+    counts.has("") ? el("option", { value: NONE, text: `无所属（${counts.get("")}）` }) : null,
+  );
+}
+
+/* ---------- stats view ---------- */
+function groupRows(keyOf, order) {
+  const map = new Map();
+  for (const s of SWORDS) {
+    const k = keyOf(s);
+    if (!map.has(k)) map.set(k, { key: k, total: 0, owned: 0, kTotal: 0, kOwned: 0 });
+    const g = map.get(k);
+    const r = records[s.id];
+    g.total++;
+    if (r) g.owned++;
+    if (kiwaAble(s)) { g.kTotal++; if (r && r.k) g.kOwned++; }
+  }
+  const rows = [...map.values()];
+  if (order) rows.sort((a, b) => order.indexOf(a.key) - order.indexOf(b.key));
+  else rows.sort((a, b) => (a.key === "" ? 1 : 0) - (b.key === "" ? 1 : 0) || b.total - a.total || a.key.localeCompare(b.key, "zh"));
+  return rows;
+}
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+
+function renderTable(table, rows, headLabel, labelOf) {
+  const head = el("thead", {}, el("tr", {},
+    el("th", { text: headLabel }),
+    el("th", { class: "num", text: "已有/总数" }),
+    el("th", { text: "收集率" }),
+    el("th", { class: "num", text: "已极化" }),
+  ));
+  const body = el("tbody", {}, ...rows.map(g => el("tr", {},
+    el("td", { text: labelOf(g.key) }),
+    el("td", { class: "num", text: `${g.owned}/${g.total}` }),
+    el("td", { class: "bar-cell" }, el("div", { class: "bar" },
+      el("div", { class: "bar-track" }, el("div", { class: "bar-fill", style: `width:${pct(g.owned, g.total)}%` })),
+      el("span", { class: "bar-pct", text: pct(g.owned, g.total) + "%" }))),
+    el("td", { class: "num kcell", text: g.kTotal ? `${g.kOwned}/${g.kTotal}` : "—" }),
+  )));
+  table.replaceChildren(head, body);
+}
+
+function arc(cx, cy, r, a0, a1) {
+  const x0 = cx + r * Math.sin(a0), y0 = cy - r * Math.cos(a0);
+  const x1 = cx + r * Math.sin(a1), y1 = cy - r * Math.cos(a1);
+  const large = a1 - a0 > Math.PI ? 1 : 0;
+  return `M${cx} ${cy} L${x0.toFixed(3)} ${y0.toFixed(3)} A${r} ${r} 0 ${large} 1 ${x1.toFixed(3)} ${y1.toFixed(3)} Z`;
+}
+const SVG_NS = "http://www.w3.org/2000/svg";
+function svg(tag, attrs) {
+  const n = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  return n;
+}
+
+function renderPie() {
+  const owned = SWORDS.filter(s => records[s.id]);
+  let slices;
+  if (view.pie === "type") {
+    slices = TYPES.map((t, i) => ({ label: t, n: owned.filter(s => s.type === t).length, color: `var(--p${i})` }));
+  } else {
+    const m = new Map();
+    for (const s of owned) m.set(s.school, (m.get(s.school) || 0) + 1);
+    const sorted = [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh"));
+    const top = sorted.slice(0, 7);
+    const rest = sorted.slice(7).reduce((a, [, n]) => a + n, 0);
+    slices = top.map(([k, n], i) => ({ label: schoolLabel(k), n, color: `var(--p${i})` }));
+    if (rest) slices.push({ label: `其他（${sorted.length - 7} 组）`, n: rest, color: "var(--p8)" });
+  }
+  const total = slices.reduce((a, s) => a + s.n, 0);
+  const pie = $("#pie");
+  const title = $("#pieTitle");
+  pie.replaceChildren(title);
+  const legend = $("#legend");
+
+  if (!total) {
+    pie.append(svg("circle", { cx: 100, cy: 100, r: 92, fill: "none", style: "stroke:var(--line);stroke-width:2;stroke-dasharray:4 4" }));
+    const t = svg("text", { x: 100, y: 105, "text-anchor": "middle", style: "fill:var(--ink-2);font-size:13px" });
+    t.textContent = "还没有记录";
+    pie.append(t);
+    legend.replaceChildren(el("li", { style: "display:block" }, "在刀帐里点击卡片，就会出现在这里。"));
+    return;
+  }
+  const visible = slices.filter(s => s.n > 0);
+  let a = 0;
+  for (const s of visible) {
+    const span = s.n / total * Math.PI * 2;
+    const node = visible.length === 1
+      ? svg("circle", { cx: 100, cy: 100, r: 92, style: `fill:${s.color}` })
+      : svg("path", { d: arc(100, 100, 92, a, a + span), style: `fill:${s.color};stroke:var(--card);stroke-width:1.5` });
+    const tt = svg("title", {});
+    tt.textContent = `${s.label}：${s.n} 把（${pct(s.n, total)}%）`;
+    node.append(tt);
+    pie.append(node);
+    a += span;
+  }
+  legend.replaceChildren(...slices.map(s => el("li", {},
+    el("span", { class: "sw", style: `background:${s.color}` }),
+    el("span", { text: s.label }),
+    el("span", { class: "n", text: `${s.n} 把` }),
+    el("span", { class: "pct", text: `${(s.n / total * 100).toFixed(1)}%` }),
+  )));
+}
+
+function renderStats() {
+  const ownedN = Object.keys(records).length;
+  const kiwaN = Object.values(records).filter(r => r.k).length;
+  const dated = Object.values(records).filter(r => r.d).length;
+  $("#summary").replaceChildren(
+    el("div", {}, el("b", { text: `${pct(ownedN, SWORDS.length)}%` }), `总收集率（${ownedN}/${SWORDS.length}）`),
+    el("div", {}, el("b", { text: `${pct(kiwaN, KIWA_TOTAL)}%` }), `极化率（${kiwaN}/${KIWA_TOTAL}，只包含已实装极化的刀剑）`),
+    el("div", {}, el("b", { text: `${SWORDS.length - ownedN}` }), "尚未拥有"),
+    el("div", {}, el("b", { text: `${dated}` }), "已录入入手日期"),
+  );
+  renderPie();
+  renderTable($("#typeTable"), groupRows(s => s.type, TYPES), "刀种", k => k);
+  renderTable($("#schoolTable"), groupRows(s => s.school), "刀派·刀工", schoolLabel);
+}
+
+/* ---------- header ---------- */
+function renderHeader() {
+  const ownedN = Object.keys(records).length;
+  const kiwaN = Object.values(records).filter(r => r.k).length;
+  $("#tOwned").textContent = ownedN;
+  $("#tTotal").textContent = SWORDS.length;
+  $("#tKiwa").textContent = kiwaN;
+  $("#tKiwaTotal").textContent = KIWA_TOTAL;
+  $("#progress").style.width = pct(ownedN, SWORDS.length) + "%";
+}
+
+function renderAll() {
+  renderHeader();
+  renderBook();
+  if (!$("#view-stats").hidden) renderStats();
+}
+
+/* ---------- edit dialog ---------- */
+const editDlg = $("#editDlg");
+let editingId = null;
+function openEdit(id) {
+  const s = byId.get(String(id));
+  const r = records[s.id] || {};
+  editingId = String(s.id);
+  $("#dlgName").textContent = s.name;
+  $("#dlgMeta").textContent = `No.${s.id}，${s.type}，${schoolLabel(s.school)}`;
+  $("#dlgOwned").checked = !!r.o;
+  $("#dlgKiwa").checked = !!r.k;
+  $("#dlgKiwaRow").hidden = !kiwaAble(s);
+  $("#dlgNoKiwa").hidden = kiwaAble(s);
+  $("#dlgDate").value = r.d || "";
+  editDlg.returnValue = "";
+  editDlg.showModal();
+}
+$("#dlgKiwa").addEventListener("change", e => { if (e.target.checked) $("#dlgOwned").checked = true; });
+$("#dlgDate").addEventListener("input", e => { if (e.target.value) $("#dlgOwned").checked = true; });
+$("#dlgOwned").addEventListener("change", e => {
+  if (!e.target.checked) { $("#dlgKiwa").checked = false; $("#dlgDate").value = ""; }
+});
+$("#dlgClearDate").addEventListener("click", () => { $("#dlgDate").value = ""; });
+editDlg.addEventListener("close", () => {
+  if (editDlg.returnValue !== "save" || editingId == null) return;
+  const key = editingId;
+  const s = byId.get(key);
+  const owned = $("#dlgOwned").checked;
+  const prev = records[key] ? { ...records[key] } : null;
+  if (!owned) {
+    if (!prev) return;
+    delete records[key];
+    commit();
+    toast(`已取消拥有 ${s.name}`, () => { records[key] = prev; commit(); });
+    return;
+  }
+  const r = { o: true };
+  if (kiwaAble(s) && $("#dlgKiwa").checked) r.k = true;
+  const d = $("#dlgDate").value;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(d)) r.d = d;
+  if (JSON.stringify(r) === JSON.stringify(prev)) return;
+  records[key] = r;
+  commit();
+  toast(`已保存 ${s.name}`);
+});
+
+/* ---------- confirm dialog ---------- */
+const confirmDlg = $("#confirmDlg");
+function askConfirm(msg, okText) {
+  return new Promise(resolve => {
+    $("#confirmMsg").textContent = msg;
+    $("#confirmOk").textContent = okText;
+    confirmDlg.returnValue = "";
+    confirmDlg.addEventListener("close", () => resolve(confirmDlg.returnValue === "ok"), { once: true });
+    confirmDlg.showModal();
+  });
+}
+
+/* ---------- toast ---------- */
+let toastTimer = null;
+function toast(msg, undo) {
+  const t = $("#toast");
+  $("#toastMsg").textContent = msg;
+  const btn = $("#toastUndo");
+  btn.hidden = !undo;
+  btn.onclick = undo ? () => { undo(); hideToast(); } : null;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(hideToast, undo ? 6000 : 2500);
+}
+function hideToast() { $("#toast").classList.remove("show"); }
+
+/* ---------- backup ---------- */
+function exportPayload() {
+  const list = SWORDS.map(s => {
+    const r = records[s.id];
+    return { id: s.id, name: s.name, owned: !!r, kiwame: !!(r && r.k), date: (r && r.d) || null };
+  });
+  return JSON.stringify({ app: "touken-tracker", version: 1, exportedAt: new Date().toISOString(), records, list }, null, 2);
+}
+$("#exportBtn").addEventListener("click", () => {
+  const text = exportPayload();
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  const url = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+  const a = el("a", { href: url, download: `touken-tracker-${today}.json` });
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast("已导出备份");
+});
+
+async function importText(text) {
+  let parsed;
+  try { parsed = JSON.parse(text); } catch (e) { toast("这不是有效的 JSON，检查一下是否复制完整"); return; }
+  const next = fromImport(parsed);
+  if (!next) { toast("没有在文件里找到刀帐记录"); return; }
+  const n = Object.keys(next).length;
+  const cur = Object.keys(records).length;
+  const ok = await askConfirm(`导入会用文件里的 ${n} 条拥有记录替换当前的 ${cur} 条记录。确定导入吗？`, "导入并替换");
+  if (!ok) return;
+  records = next;
+  commit();
+  toast(`已导入 ${n} 条记录`);
+}
+$("#importFile").addEventListener("change", e => {
+  const f = e.target.files && e.target.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = () => importText(String(reader.result));
+  reader.onerror = () => toast("文件读取失败，换一个文件试试");
+  reader.readAsText(f);
+  e.target.value = "";
+});
+$("#importTextBtn").addEventListener("click", () => {
+  const t = $("#importText").value.trim();
+  if (!t) { toast("先把 JSON 内容粘贴进来"); return; }
+  importText(t);
+});
+$("#resetBtn").addEventListener("click", async () => {
+  const cur = Object.keys(records).length;
+  if (!cur) { toast("现在没有任何记录"); return; }
+  const ok = await askConfirm(`确定清空全部 ${cur} 条记录吗？清空后无法撤销。`, "清空");
+  if (!ok) return;
+  records = {};
+  commit();
+  toast("已清空全部记录");
+});
+
+/* ---------- tabs & filters ---------- */
+document.querySelectorAll(".tabs button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b === btn)));
+    for (const name of ["book", "stats", "backup"]) $("#view-" + name).hidden = name !== tab;
+    if (tab === "stats") renderStats();
+  });
+});
+document.querySelectorAll("[data-pie]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    view.pie = btn.dataset.pie;
+    document.querySelectorAll("[data-pie]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+    renderPie();
+  });
+});
+$("#schoolSel").addEventListener("change", e => { view.school = e.target.value; renderBook(); });
+$("#statusSel").addEventListener("change", e => { view.status = e.target.value; renderBook(); });
+$("#clearFilters").addEventListener("click", () => {
+  view.type = "all"; view.school = "all"; view.status = "all";
+  $("#schoolSel").value = "all";
+  $("#statusSel").value = "all";
+  renderBook();
+});
+
+/* ---------- footer ---------- */
+function renderFooter() {
+  const name = String(AUTHOR_NAME || "").trim();
+  if (!name) return;
+  const box = $("#footAuthor");
+  const link = String(AUTHOR_LINK || "").trim();
+  box.append(`© ${new Date().getFullYear()} `);
+  box.append(/^https?:\/\//i.test(link)
+    ? el("a", { href: link, target: "_blank", rel: "noopener noreferrer", text: name })
+    : name);
+  box.append(" 制作");
+  box.hidden = false;
+}
+
+/* ---------- start ---------- */
+renderFooter();
+records = loadLocal();
+buildSchoolSelect();
+renderAll();
+updateStatus();
+</script>
+</body>
+</html>
